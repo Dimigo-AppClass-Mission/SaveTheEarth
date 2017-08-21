@@ -6,15 +6,28 @@
     android:layout_height="match_parent"
     tools:context="me.hyemdooly.sangs.dimigo.app.project.MainActivity"
     android:background="@color/colorUniverse">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:id="@+id/ic_earth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_earth"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+        <ImageView
+            android:id="@+id/ic_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_title"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/ic_earth"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="50dp"
-        />
+    </RelativeLayout>
+
 
 
 
