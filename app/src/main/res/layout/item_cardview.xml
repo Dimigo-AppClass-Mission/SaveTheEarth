@@ -9,7 +9,7 @@
         android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/cardview_default_radius"
+        app:cardCornerRadius="5dp"
         android:layout_margin="10dp">
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -18,7 +18,8 @@
                 android:id="@+id/layout_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#7ADBD1"
+                android:background="@drawable/card_title_background"
+                android:backgroundTint="#7ADBD1"
                 android:padding="8dp">
 
                 <ImageView
@@ -33,7 +34,7 @@
                     android:id="@+id/card_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="asdfasdfasdf"
+                    android:text="시간"
                     android:layout_toRightOf="@+id/ic_clock"
                     android:layout_toEndOf="@+id/ic_clock"
                     android:layout_centerVertical="true"
@@ -46,7 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:background="#FFFFFF"
+                android:background="@drawable/card_background"
                 android:layout_below="@id/layout_title"
                 >
                 <TextView
@@ -55,14 +56,18 @@
                     android:layout_height="wrap_content"
                     android:textSize="13dp"
                     android:text="1시간동안 휴대폰 사용하지 않기(1/37)"
+                    android:textColor="#000000"
                     />
+
                 <TextView
+                    android:id="@+id/card_counter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="32분 / 1시간"
                     android:textSize="8dp"
                     android:layout_below="@id/card_purpose"
                     android:gravity="end"
+                    android:textColor="#000000"
                     />
 
 

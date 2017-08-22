@@ -18,8 +18,8 @@ class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
            return null
         }
         when(position){
-            0 -> curFragment = AchieveFragment()
-            1 -> curFragment = StatsFragment()
+            0 -> curFragment = StatsFragment()
+            1 -> curFragment = AchieveFragment()
         }
         return curFragment
     }
