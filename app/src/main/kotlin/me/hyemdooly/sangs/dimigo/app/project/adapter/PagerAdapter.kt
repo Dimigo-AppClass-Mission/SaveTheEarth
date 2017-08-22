@@ -1,10 +1,10 @@
-package me.hyemdooly.sangs.dimigo.app.project.Adapter
+package me.hyemdooly.sangs.dimigo.app.project.adapter
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import me.hyemdooly.sangs.dimigo.app.project.Fragment.AchieveFragment
-import me.hyemdooly.sangs.dimigo.app.project.Fragment.StatsFragment
+import me.hyemdooly.sangs.dimigo.app.project.fragment.AchieveFragment
+import me.hyemdooly.sangs.dimigo.app.project.fragment.StatsFragment
 
 /**
  * Created by songhyemin on 2017. 8. 22..

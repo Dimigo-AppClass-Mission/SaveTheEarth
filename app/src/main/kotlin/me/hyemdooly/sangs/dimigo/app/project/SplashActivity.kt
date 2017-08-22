@@ -1,10 +1,9 @@
-package me.hyemdooly.sangs.dimigo.app.project.Activity
+package me.hyemdooly.sangs.dimigo.app.project
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
-import me.hyemdooly.sangs.dimigo.app.project.R
 
 class SplashActivity : AppCompatActivity() {
 

@@ -1,10 +1,10 @@
-package me.hyemdooly.sangs.dimigo.app.project.Service
+package me.hyemdooly.sangs.dimigo.app.project.service
 
 import android.app.Service
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
-import me.hyemdooly.sangs.dimigo.app.project.Receiver.ScreenOnOffReceiver
+import me.hyemdooly.sangs.dimigo.app.project.receiver.ScreenOnOffReceiver
 
 /**
  * Created by songhyemin on 2017. 8. 22..

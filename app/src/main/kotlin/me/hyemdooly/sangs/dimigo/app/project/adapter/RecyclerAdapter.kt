@@ -1,4 +1,4 @@
-package me.hyemdooly.sangs.dimigo.app.project.Adapter
+package me.hyemdooly.sangs.dimigo.app.project.adapter
 
 import android.content.Context
 import android.content.res.ColorStateList

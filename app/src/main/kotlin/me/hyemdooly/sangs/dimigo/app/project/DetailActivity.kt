@@ -1,4 +1,4 @@
-package me.hyemdooly.sangs.dimigo.app.project.Activity
+package me.hyemdooly.sangs.dimigo.app.project
 
 import android.app.Activity
 import android.content.Intent
@@ -12,10 +12,9 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.ToggleButton
-import me.hyemdooly.sangs.dimigo.app.project.Fragment.AchieveFragment
-import me.hyemdooly.sangs.dimigo.app.project.Fragment.StatsFragment
-import me.hyemdooly.sangs.dimigo.app.project.R
-import me.hyemdooly.sangs.dimigo.app.project.Service.ScreenOnOffService
+import me.hyemdooly.sangs.dimigo.app.project.fragment.AchieveFragment
+import me.hyemdooly.sangs.dimigo.app.project.fragment.StatsFragment
+import me.hyemdooly.sangs.dimigo.app.project.service.ScreenOnOffService
 
 class DetailActivity : AppCompatActivity(), AchieveFragment.OnFragmentInteractionListener, StatsFragment.OnFragmentInteractionListener {
 
@@ -38,8 +37,8 @@ class DetailActivity : AppCompatActivity(), AchieveFragment.OnFragmentInteractio
         achieveButton = findViewById(R.id.achieve_button)
 
         viewPager = findViewById(R.id.view_pager)
-        var adapter: me.hyemdooly.sangs.dimigo.app.project.Adapter.PagerAdapter
-                = me.hyemdooly.sangs.dimigo.app.project.Adapter.PagerAdapter(supportFragmentManager)
+        var adapter: me.hyemdooly.sangs.dimigo.app.project.adapter.PagerAdapter
+                = me.hyemdooly.sangs.dimigo.app.project.adapter.PagerAdapter(supportFragmentManager)
 
         viewPager.adapter = adapter
 

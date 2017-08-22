@@ -1,4 +1,4 @@
-package me.hyemdooly.sangs.dimigo.app.project.Activity
+package me.hyemdooly.sangs.dimigo.app.project
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

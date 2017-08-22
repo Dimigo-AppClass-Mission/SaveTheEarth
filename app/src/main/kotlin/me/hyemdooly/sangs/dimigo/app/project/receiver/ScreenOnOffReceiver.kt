@@ -1,4 +1,4 @@
-package me.hyemdooly.sangs.dimigo.app.project.Receiver
+package me.hyemdooly.sangs.dimigo.app.project.receiver
 
 import android.content.BroadcastReceiver
 import android.content.Context

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorUniverse"
-    tools:context="me.hyemdooly.sangs.dimigo.app.project.Activity.MainActivity">
+    tools:context="me.hyemdooly.sangs.dimigo.app.project.MainActivity">
 
     <android.support.constraint.Guideline
         android:layout_width="match_parent"

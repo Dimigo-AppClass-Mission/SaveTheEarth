@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
 
-    tools:context="me.hyemdooly.sangs.dimigo.app.project.Activity.DetailActivity">
+    tools:context="me.hyemdooly.sangs.dimigo.app.project.DetailActivity">
     <android.support.constraint.Guideline
         android:id="@+id/title_guideline"
         android:layout_width="wrap_content"
