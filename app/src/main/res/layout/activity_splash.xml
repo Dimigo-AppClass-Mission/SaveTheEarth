@@ -7,28 +7,25 @@
     tools:context="me.hyemdooly.sangs.dimigo.app.project.Activity.MainActivity"
     android:background="@color/colorUniverse"
     >
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        >
+
         <ImageView
             android:id="@+id/ic_earth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_earth"
             android:adjustViewBounds="true"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="parent"
             />
         <ImageView
             android:id="@+id/ic_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_title"
-            android:layout_alignBottom="@id/ic_earth" />
-
-    </RelativeLayout>
-
-
+            android:layout_alignBottom="@id/ic_earth"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="parent"
+            />
 
 
 </android.support.constraint.ConstraintLayout>
