@@ -1,25 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorUniverse"
+    android:background="#270F30"
     tools:context="me.hyemdooly.sangs.dimigo.app.project.MainActivity">
 
-    <android.support.constraint.Guideline
+    <WebView
+        android:id="@+id/main_activity_background_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
+        android:layout_height="match_parent" />
+
     <ImageView
+        android:id="@+id/main_activity_white_moon"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
+        android:src="@drawable/ic_moon"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="37dp"
+        android:layout_alignParentRight="true" />
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_earth"
-        android:adjustViewBounds="true"
-        />
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:text="지구를 구해줘!"
+            fontPath="fonts/NanumSquareBold.ttf"
+            tools:ignore="MissingPrefix" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="12dp"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="right"
+            android:text="휴대폰 사용시간\n줄이기 프로젝트"/>
+    </LinearLayout>
 
-
-
-
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_earth_borderless"/>
+        <TextView
+            android:id="@+id/main_activity_level_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="25dp"
+            android:text="Lv 2."
+            android:layout_gravity="center"
+            fontPath="fonts/NanumSquareBold.ttf"
+            tools:ignore="MissingPrefix"/>
+        <TextView
+            android:id="@+id/main_activity_level_humanreadable_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#F57676"
+            android:textSize="30dp"
+            android:text="많이 아픈 지구"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            fontPath="fonts/NanumSquareBold.ttf"
+            tools:ignore="MissingPrefix"
+            android:layout_marginBottom="50dp"/>
+    </LinearLayout>
+</RelativeLayout>
