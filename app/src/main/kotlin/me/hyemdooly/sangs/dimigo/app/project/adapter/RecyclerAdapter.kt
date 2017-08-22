@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
 import me.hyemdooly.sangs.dimigo.app.project.R
+import me.hyemdooly.sangs.dimigo.app.project.model.Item
 
 /**
  * Created by songhyemin on 2017. 8. 22..

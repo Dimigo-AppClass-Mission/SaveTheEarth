@@ -1,4 +1,4 @@
-package me.hyemdooly.sangs.dimigo.app.project.adapter
+package me.hyemdooly.sangs.dimigo.app.project.model
 
 /**
  * Created by songhyemin on 2017. 8. 22..
