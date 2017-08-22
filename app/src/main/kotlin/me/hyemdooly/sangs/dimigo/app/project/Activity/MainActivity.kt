@@ -1,7 +1,8 @@
-package me.hyemdooly.sangs.dimigo.app.project
+package me.hyemdooly.sangs.dimigo.app.project.Activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import me.hyemdooly.sangs.dimigo.app.project.R
 
 class MainActivity : AppCompatActivity() {
 
