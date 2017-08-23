@@ -3,31 +3,37 @@ package me.hyemdooly.sangs.dimigo.app.project.receiver
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.util.Log
+import me.hyemdooly.sangs.dimigo.app.project.database.DataController
+import java.util.*
 
 /**
  * Created by songhyemin on 2017. 8. 22..
  */
 class ScreenOnOffReceiver : BroadcastReceiver() {
+    lateinit var dataController: DataController
     var firstTime: Long = 0
     var lastTime: Long = 0
     var countTime: Long = 0
 
     override fun onReceive(p0: Context?, p1: Intent?) {
+        dataController = DataController()
+
         when(p1?.action){
             Intent.ACTION_SCREEN_OFF -> {
                 lastTime = System.currentTimeMillis()
-                Log.d("Screen", "OFF")
-                if(firstTime > 0){
+                if(!firstTime.equals(0)){
                     countTime = lastTime-firstTime
+                    dataController.addTimeData("used", countTime, Date())
+                    firstTime = lastTime
                 }
-
-                Log.d("Count", countTime.toString())
-
             }
             Intent.ACTION_SCREEN_ON -> {
-                Log.d("Screen", "ON")
-                firstTime = System.currentTimeMillis()
+                lastTime = System.currentTimeMillis()
+                if(!firstTime.equals(0)){
+                    countTime = lastTime-firstTime
+                    dataController.addTimeData("unused", countTime, Date())
+                    firstTime = lastTime
+                }
             }
         }
     }

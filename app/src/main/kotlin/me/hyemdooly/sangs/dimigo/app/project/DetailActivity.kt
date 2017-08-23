@@ -12,6 +12,8 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.ToggleButton
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import me.hyemdooly.sangs.dimigo.app.project.fragment.AchieveFragment
 import me.hyemdooly.sangs.dimigo.app.project.fragment.StatsFragment
 import me.hyemdooly.sangs.dimigo.app.project.service.ScreenOnOffService
@@ -27,6 +29,9 @@ class DetailActivity : AppCompatActivity(), AchieveFragment.OnFragmentInteractio
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+        Realm.init(this)
+        var realmConfiguration: RealmConfiguration = RealmConfiguration.Builder().build()
+        Realm.setDefaultConfiguration(realmConfiguration)
 
         setStatusBar(this@DetailActivity, Color.WHITE)
 
@@ -43,7 +48,7 @@ class DetailActivity : AppCompatActivity(), AchieveFragment.OnFragmentInteractio
         viewPager.adapter = adapter
 
         viewPager.currentItem = 0
-        statsButton.isChecked = true;
+        statsButton.isChecked = true
 
 
 

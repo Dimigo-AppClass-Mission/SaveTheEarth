@@ -61,12 +61,12 @@
 
                 <TextView
                     android:id="@+id/card_counter"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="32분 / 1시간"
                     android:textSize="8dp"
                     android:layout_below="@id/card_purpose"
-                    android:gravity="end"
+                    android:layout_alignParentRight="true"
                     android:textColor="#000000"
                     />
 
