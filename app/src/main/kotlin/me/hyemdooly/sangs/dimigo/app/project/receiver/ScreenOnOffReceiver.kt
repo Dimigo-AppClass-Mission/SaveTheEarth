@@ -6,9 +6,6 @@ import android.content.Intent
 import me.hyemdooly.sangs.dimigo.app.project.database.DataController
 import java.util.*
 
-/**
- * Created by songhyemin on 2017. 8. 22..
- */
 class ScreenOnOffReceiver : BroadcastReceiver() {
     lateinit var dataController: DataController
     var firstTime: Long = 0

@@ -6,9 +6,6 @@ import android.support.v4.app.FragmentPagerAdapter
 import me.hyemdooly.sangs.dimigo.app.project.fragment.AchieveFragment
 import me.hyemdooly.sangs.dimigo.app.project.fragment.StatsFragment
 
-/**
- * Created by songhyemin on 2017. 8. 22..
- */
 class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     private var MAX_PAGE: Int = 2
     private var curFragment: Fragment = Fragment()
@@ -18,8 +15,12 @@ class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
            return null
         }
         when(position){
-            0 -> curFragment = StatsFragment()
-            1 -> curFragment = AchieveFragment()
+            0 -> {
+                curFragment = StatsFragment()
+            }
+            1 -> {
+                curFragment = AchieveFragment()
+            }
         }
         return curFragment
     }
@@ -27,4 +28,7 @@ class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getCount(): Int {
         return MAX_PAGE
     }
+
+
+
 }

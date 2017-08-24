@@ -11,15 +11,15 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.widget.Toast
 import android.widget.ToggleButton
-import io.realm.Realm
-import io.realm.RealmConfiguration
 import me.hyemdooly.sangs.dimigo.app.project.fragment.AchieveFragment
 import me.hyemdooly.sangs.dimigo.app.project.fragment.StatsFragment
 import me.hyemdooly.sangs.dimigo.app.project.service.ScreenOnOffService
 
 class DetailActivity : AppCompatActivity(), AchieveFragment.OnFragmentInteractionListener, StatsFragment.OnFragmentInteractionListener {
 
+    private var backpressed : Long = 0
     lateinit var viewPager: ViewPager
     lateinit var statsButton: ToggleButton
     lateinit var achieveButton: ToggleButton
@@ -29,9 +29,6 @@ class DetailActivity : AppCompatActivity(), AchieveFragment.OnFragmentInteractio
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
-        Realm.init(this)
-        var realmConfiguration: RealmConfiguration = RealmConfiguration.Builder().build()
-        Realm.setDefaultConfiguration(realmConfiguration)
 
         setStatusBar(this@DetailActivity, Color.WHITE)
 
@@ -50,9 +47,33 @@ class DetailActivity : AppCompatActivity(), AchieveFragment.OnFragmentInteractio
         viewPager.currentItem = 0
         statsButton.isChecked = true
 
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+
+            }
+
+            override fun onPageSelected(position: Int) {
+                when(position){
+                    0 -> {
+                        statsButton.isChecked = true
+                        achieveButton.isChecked = false
+                    }
+                    1 -> {
+                        achieveButton.isChecked = true
+                        statsButton.isChecked = false
+                    }
+                }
+            }
+
+        })
 
 
     }
+
 
     fun onClick(v: View){
         when(v.id){
@@ -62,7 +83,6 @@ class DetailActivity : AppCompatActivity(), AchieveFragment.OnFragmentInteractio
                 if(!statsButton.isChecked){
                     statsButton.isChecked = true
                 }
-
             }
             R.id.achieve_button -> {
                 viewPager.currentItem = 1
@@ -70,14 +90,12 @@ class DetailActivity : AppCompatActivity(), AchieveFragment.OnFragmentInteractio
                 if(!achieveButton.isChecked){
                     achieveButton.isChecked = true
                 }
-
             }
         }
-
-
-
-
     }
+
+
+
 
     override fun onFragmentInteraction(uri: Uri) {
 
@@ -90,6 +108,16 @@ class DetailActivity : AppCompatActivity(), AchieveFragment.OnFragmentInteractio
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.statusBarColor = color
         }
+    }
+
+    override fun onBackPressed() {
+        if(backpressed+2000 > System.currentTimeMillis()){
+            super.onBackPressed()
+        } else{
+            Toast.makeText(this, "한번 더 누르면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show()
+        }
+        backpressed = System.currentTimeMillis()
+
     }
 
 

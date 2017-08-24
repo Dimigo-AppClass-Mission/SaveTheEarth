@@ -13,9 +13,6 @@ import android.widget.TextView
 import me.hyemdooly.sangs.dimigo.app.project.R
 import me.hyemdooly.sangs.dimigo.app.project.model.Item
 
-/**
- * Created by songhyemin on 2017. 8. 22..
- */
 class RecyclerAdapter(context: Context, items: List<Item>) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     var context: Context = context
@@ -24,6 +21,7 @@ class RecyclerAdapter(context: Context, items: List<Item>) : RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         var item: Item = items[position]
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             holder?.titleLayout?.backgroundTintList = ColorStateList.valueOf(Color.parseColor(palette[position%3]))
         }

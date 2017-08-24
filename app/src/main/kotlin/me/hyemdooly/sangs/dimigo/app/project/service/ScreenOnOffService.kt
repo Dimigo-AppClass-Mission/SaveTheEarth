@@ -6,9 +6,6 @@ import android.content.IntentFilter
 import android.os.IBinder
 import me.hyemdooly.sangs.dimigo.app.project.receiver.ScreenOnOffReceiver
 
-/**
- * Created by songhyemin on 2017. 8. 22..
- */
 class ScreenOnOffService : Service() {
 
     lateinit var screenReceiver: ScreenOnOffReceiver

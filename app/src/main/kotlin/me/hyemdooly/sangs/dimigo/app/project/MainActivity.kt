@@ -9,9 +9,12 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 class MainActivity : AppCompatActivity() {
+
+    private var backpressed : Long = 0
     private val backgroundView by lazy { findViewById<WebView>(R.id.main_activity_background_view) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,4 +52,15 @@ class MainActivity : AppCompatActivity() {
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase!!))
     }
+
+    override fun onBackPressed() {
+        if(backpressed+2000 > System.currentTimeMillis()){
+            super.onBackPressed()
+        } else{
+            Toast.makeText(this, "한번 더 누르면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show()
+        }
+        backpressed = System.currentTimeMillis()
+
+    }
+
 }
