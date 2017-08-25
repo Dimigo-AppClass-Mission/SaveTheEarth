@@ -7,14 +7,12 @@ import me.hyemdooly.sangs.dimigo.app.project.database.DataController
 import java.util.*
 
 class ScreenOnOffReceiver : BroadcastReceiver() {
-    lateinit var dataController: DataController
-    var firstTime: Long = 0
+    var dataController: DataController = DataController()
+    var firstTime: Long = System.currentTimeMillis()
     var lastTime: Long = 0
     var countTime: Long = 0
 
     override fun onReceive(p0: Context?, p1: Intent?) {
-        dataController = DataController()
-
         when(p1?.action){
             Intent.ACTION_SCREEN_OFF -> {
                 lastTime = System.currentTimeMillis()

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -20,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/card_title_background"
                 android:backgroundTint="#7ADBD1"
-                android:padding="8dp">
+                android:padding="9dp">
 
                 <ImageView
                     android:id="@+id/ic_clock"
@@ -38,7 +39,8 @@
                     android:layout_toRightOf="@+id/ic_clock"
                     android:layout_toEndOf="@+id/ic_clock"
                     android:layout_centerVertical="true"
-
+                    fontPath="fonts/NanumSquareBold.ttf"
+                    tools:ignore="MissingPrefix"
                     android:textColor="#FFFFFF"
                     />
 
@@ -46,7 +48,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
+                android:padding="12dp"
                 android:background="@drawable/card_background"
                 android:layout_below="@id/layout_title"
                 >
@@ -57,17 +59,20 @@
                     android:textSize="13dp"
                     android:text="1시간동안 휴대폰 사용하지 않기(1/37)"
                     android:textColor="#000000"
+                    fontPath="fonts/NanumSquareBold.ttf"
+                    tools:ignore="MissingPrefix"
                     />
+
 
                 <TextView
                     android:id="@+id/card_counter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="32분 / 1시간"
-                    android:textSize="8dp"
+                    android:textSize="12dp"
                     android:layout_below="@id/card_purpose"
                     android:layout_alignParentRight="true"
-                    android:textColor="#000000"
+                    android:textColor="#88000000"
                     />
 
 

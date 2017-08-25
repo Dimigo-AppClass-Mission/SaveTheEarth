@@ -19,7 +19,7 @@ import me.hyemdooly.sangs.dimigo.app.project.service.ScreenOnOffService
 
 class DetailActivity : AppCompatActivity(), AchieveFragment.OnFragmentInteractionListener, StatsFragment.OnFragmentInteractionListener {
 
-    private var backpressed : Long = 0
+    private var backpressed: Long = 0
     lateinit var viewPager: ViewPager
     lateinit var statsButton: ToggleButton
     lateinit var achieveButton: ToggleButton
@@ -46,6 +46,7 @@ class DetailActivity : AppCompatActivity(), AchieveFragment.OnFragmentInteractio
 
         viewPager.currentItem = 0
         statsButton.isChecked = true
+
 
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {

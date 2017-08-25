@@ -17,22 +17,22 @@ class DataController {
             "used" -> {
                 var timeUsed: TimeUsed = TimeUsed()
                 timeUsed.date = date
-                timeUsed.time = (millis/360000).toInt()
+                timeUsed.time = (millis/60000).toInt()
                 realm.beginTransaction()
                 realm.copyToRealm(timeUsed)
                 realm.commitTransaction()
-                Log.d("data", realm.where(TimeUsed::class.java).findAll().toString())
+                Log.d("data", realm.where(TimeUsed::class.java).findAll().lastIndex.toString())
 
             }
 
             "unused" -> {
                 var timeUnUsed: TimeUnUsed = TimeUnUsed()
                 timeUnUsed.date = date
-                timeUnUsed.time = (millis/360000).toInt()
+                timeUnUsed.time = (millis/60000).toInt()
                 realm.beginTransaction()
                 realm.copyToRealm(timeUnUsed)
                 realm.commitTransaction()
-                Log.d("data", realm.where(TimeUnUsed::class.java).findAll().toString())
+                Log.d("data", realm.where(TimeUnUsed::class.java).findAll().lastIndex.toString())
             }
         }
     }

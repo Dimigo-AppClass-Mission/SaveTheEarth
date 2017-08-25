@@ -4,13 +4,15 @@ import android.app.Service
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.IBinder
+import io.realm.Realm
 import me.hyemdooly.sangs.dimigo.app.project.receiver.ScreenOnOffReceiver
 
-class ScreenOnOffService : Service() {
+class ScreenOnOffService() : Service() {
 
     lateinit var screenReceiver: ScreenOnOffReceiver
 
     override fun onCreate() {
+        Realm.init(applicationContext)
         registerStatusReceiver()
     }
 
