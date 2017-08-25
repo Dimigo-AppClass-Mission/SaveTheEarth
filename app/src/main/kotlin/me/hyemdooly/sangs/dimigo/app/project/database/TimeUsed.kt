@@ -7,6 +7,6 @@ import java.util.*
  * Created by songhyemin on 2017. 8. 23..
  */
 public open class TimeUsed : RealmObject() {
-    public open var time: Int? = null
+    public open var time: Long? = null
     public open var date: Date? = null
 }
