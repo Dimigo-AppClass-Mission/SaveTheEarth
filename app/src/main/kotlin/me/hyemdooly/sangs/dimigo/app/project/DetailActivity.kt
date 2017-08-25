@@ -24,8 +24,6 @@ class DetailActivity : AppCompatActivity(), AchieveFragment.OnFragmentInteractio
     lateinit var statsButton: ToggleButton
     lateinit var achieveButton: ToggleButton
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)

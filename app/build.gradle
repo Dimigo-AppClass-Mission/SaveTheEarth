@@ -42,4 +42,5 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:26.0.1'
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     implementation 'com.github.glomadrian:Grav:1.1'
+    implementation "com.andkulikov:transitionseverywhere:1.7.5"
 }

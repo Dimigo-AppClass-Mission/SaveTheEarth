@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     tools:context="me.hyemdooly.sangs.dimigo.app.project.DetailActivity">
     <LinearLayout
         android:layout_width="wrap_content"
@@ -15,7 +14,7 @@
         android:id="@+id/title_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        >
+        android:visibility="invisible">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,9 +41,7 @@
         android:layout_marginTop="37dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-         />
-
-
+        android:visibility="invisible" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"

@@ -1,56 +1,111 @@
 package me.hyemdooly.sangs.dimigo.app.project
 
-import android.annotation.SuppressLint
+import android.animation.ArgbEvaluator
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.widget.RelativeLayout
+import android.widget.TextView
 import android.widget.Toast
-import me.hyemdooly.sangs.dimigo.app.project.view.TextThumbProgressBar
+
+import me.hyemdooly.sangs.dimigo.app.project.adapter.MainPagerAdapter
+import me.hyemdooly.sangs.dimigo.app.project.fragment.MainFragment
+import me.hyemdooly.sangs.dimigo.app.project.util.getStatusBarHeight
+import me.hyemdooly.sangs.dimigo.app.project.util.setSystemBarTheme
+import me.hyemdooly.sangs.dimigo.app.project.view.VerticalViewPager
+
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 class MainActivity : AppCompatActivity() {
+    private var backPressed: Long = 0
 
-    private var backpressed : Long = 0
-    private val backgroundView by lazy { findViewById<WebView>(R.id.main_activity_background_view) }
-    private val progressBar by lazy { findViewById<TextThumbProgressBar>(R.id.main_activity_progress) }
+    private val mainContainer by lazy { findViewById<RelativeLayout>(R.id.main_activity_root_view) }
+    private val statusbarContainer by lazy { findViewById<RelativeLayout>(R.id.main_activity_statusbar_area_container) }
+    private val pagerView by lazy { findViewById<VerticalViewPager>(R.id.main_activity_pager) }
+    private val titleText by lazy { findViewById<TextView>(R.id.main_activity_title_text) }
+    private val projectTitleText by lazy { findViewById<TextView>(R.id.main_activity_project_title_text) }
+
+    private val pagerAdapter by lazy { MainPagerAdapter(supportFragmentManager) }
+    private var evaluator = ArgbEvaluator()
+    private val wbColors = intArrayOf(Color.WHITE, Color.BLACK)
+    private val pwColors = intArrayOf(Color.parseColor("#270F30"), Color.WHITE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        backgroundView.visibility = View.INVISIBLE
-        backgroundView.setBackgroundColor(Color.TRANSPARENT)
+        pagerView.adapter = pagerAdapter
 
-        initBackground()
+        pagerView.addOnPageChangeListener(object: ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
 
-        progressBar.setProgressTextColor(Color.parseColor("#270F30"))
-        progressBar.setProgressBarText("2시간 46분")
-    }
-
-    @SuppressLint("SetJavaScriptEnabled")
-    fun initBackground() {
-        backgroundView.loadUrl("file:///android_asset/background/index.html")
-
-        val webSettings = backgroundView.settings
-        webSettings.javaScriptEnabled = true
-        webSettings.javaScriptCanOpenWindowsAutomatically = true
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            webSettings.allowFileAccessFromFileURLs = true
-            webSettings.allowUniversalAccessFromFileURLs = true
-        }
-
-        backgroundView.setLayerType(View.LAYER_TYPE_HARDWARE, null)
-        backgroundView.webViewClient = object: WebViewClient() {
-            override fun onPageFinished(view: WebView?, url: String?) {
-                super.onPageFinished(view, url)
-                backgroundView.visibility = View.VISIBLE
             }
-        }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                val wbColor = evaluator.evaluate(positionOffset, wbColors[position], wbColors[if (position == 1) position else position + 1]) as Int
+                val pwColor = evaluator.evaluate(positionOffset, pwColors[position], pwColors[if (position == 1) position else position + 1]) as Int
+                titleText.setTextColor(wbColor)
+                projectTitleText.setTextColor(wbColor)
+                mainContainer.setBackgroundColor(pwColor)
+
+                when(position) {
+                    0 -> {
+                        (pagerAdapter.getPage(0) as MainFragment).backgroundView!!.alpha = 1 - positionOffset
+                        (pagerAdapter.getPage(0) as MainFragment).characterView!!.alpha = 1 - positionOffset
+                        (pagerAdapter.getPage(0) as MainFragment).levelText!!.alpha = 1 - positionOffset
+                        (pagerAdapter.getPage(0) as MainFragment).levelHumanReadableText!!.alpha = 1 - positionOffset
+                        (pagerAdapter.getPage(0) as MainFragment).bottomWidgetContainer!!.alpha = 1 - positionOffset
+                    }
+                    else -> {
+                        (pagerAdapter.getPage(0) as MainFragment).backgroundView!!.alpha = positionOffset
+                        (pagerAdapter.getPage(0) as MainFragment).characterView!!.alpha = positionOffset
+                        (pagerAdapter.getPage(0) as MainFragment).levelText!!.alpha = positionOffset
+                        (pagerAdapter.getPage(0) as MainFragment).levelHumanReadableText!!.alpha = positionOffset
+                        (pagerAdapter.getPage(0) as MainFragment).bottomWidgetContainer!!.alpha = positionOffset
+                    }
+                }
+
+
+                Log.e("onPageScrolled", "$positionOffset")
+            }
+
+            override fun onPageSelected(position: Int) {
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    when(position) {
+                        0 -> {
+                            val layoutParams = RelativeLayout.LayoutParams(0, 0)
+                            statusbarContainer.layoutParams = layoutParams
+                        }
+                        else -> {
+                            val layoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, getStatusBarHeight(this@MainActivity))
+                            statusbarContainer.layoutParams = layoutParams
+                        }
+                    }
+                }
+
+                when(position) {
+                    0 -> {
+                        (pagerAdapter.getPage(0) as MainFragment).backgroundView!!.alpha = 1.toFloat()
+                        (pagerAdapter.getPage(0) as MainFragment).characterView!!.alpha = 1.toFloat()
+                        (pagerAdapter.getPage(0) as MainFragment).levelText!!.alpha = 1.toFloat()
+                        (pagerAdapter.getPage(0) as MainFragment).levelHumanReadableText!!.alpha = 1.toFloat()
+                        (pagerAdapter.getPage(0) as MainFragment).bottomWidgetContainer!!.alpha = 1.toFloat()
+                    }
+                    1 -> {
+                        (pagerAdapter.getPage(0) as MainFragment).backgroundView!!.alpha = 0.toFloat()
+                        (pagerAdapter.getPage(0) as MainFragment).characterView!!.alpha = 0.toFloat()
+                        (pagerAdapter.getPage(0) as MainFragment).levelText!!.alpha = 0.toFloat()
+                        (pagerAdapter.getPage(0) as MainFragment).levelHumanReadableText!!.alpha = 0.toFloat()
+                        (pagerAdapter.getPage(0) as MainFragment).bottomWidgetContainer!!.alpha = 0.toFloat()
+                    }
+                }
+            }
+        })
     }
 
     override fun attachBaseContext(newBase: Context?) {
@@ -58,12 +113,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if(backpressed+2000 > System.currentTimeMillis()){
+        if (backPressed + 2000 > System.currentTimeMillis()) {
             super.onBackPressed()
-        } else{
+        } else {
             Toast.makeText(this, "한번 더 누르면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show()
         }
-        backpressed = System.currentTimeMillis()
+        backPressed = System.currentTimeMillis()
 
     }
 
