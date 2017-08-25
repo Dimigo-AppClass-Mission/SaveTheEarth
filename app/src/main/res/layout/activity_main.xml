@@ -12,71 +12,170 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <com.github.glomadrian.grav.GravView
+        android:id="@+id/main_activity_character_effect"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="37dp"
+        app:colorGenerator="com.github.glomadrian.grav.generator.paint.OneColorGenerator"
+        app:single_color="#FFF"
+        app:pointGenerator="com.github.glomadrian.grav.generator.point.PercentPointGenerator"
+        app:ball_from_size="0.5dp"
+        app:ball_to_size="2dp"
+        app:animationGenerators="@array/eartheffects"
+        app:alpha_from="100"
+        app:alpha_to="200"
+        app:alpha_min_duration="1600"
+        app:alpha_max_duration="3000"
+        app:shake_direction="vertical"
+        app:shake_variance="3dp"
+        app:shake_min_duration="1100"
+        app:shake_max_duration="3500"
+        app:percent_points_array="@array/earth_points"
+        app:gravGenerator="com.github.glomadrian.grav.generator.grav.BallGenerator"
+        />
+
     <ImageView
         android:id="@+id/main_activity_white_moon"
         android:layout_width="84dp"
         android:layout_height="84dp"
-        android:src="@drawable/ic_moon"
-        android:scaleType="fitCenter"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="37dp"
-        android:layout_alignParentRight="true" />
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_moon" />
 
     <LinearLayout
+        android:id="@+id/main_activity_title_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
+
         <TextView
+            fontPath="fonts/NanumSquareBold.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="지구를 구해줘!"
             android:textColor="@android:color/white"
             android:textSize="20dp"
-            android:text="지구를 구해줘!"
-            fontPath="fonts/NanumSquareBold.ttf"
             tools:ignore="MissingPrefix" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
-            android:textSize="12dp"
-            android:layout_marginTop="5dp"
             android:layout_gravity="right"
-            android:text="휴대폰 사용시간\n줄이기 프로젝트"/>
+            android:layout_marginTop="5dp"
+            android:text="휴대폰 사용시간\n줄이기 프로젝트"
+            android:textColor="@android:color/white"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/main_activity_planet_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/main_activity_title_container"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center">
+            <ImageView
+                android:layout_width="230dp"
+                android:layout_height="230dp"
+                android:layout_gravity="center"
+                android:scaleType="centerInside"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_earth_borderless" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/main_activity_level_text"
+            fontPath="fonts/NanumSquareBold.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Lv 2."
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:layout_marginTop="-20dp"
+            tools:ignore="MissingPrefix" />
+
+        <TextView
+            android:id="@+id/main_activity_level_humanreadable_text"
+            fontPath="fonts/NanumSquareBold.ttf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:text="많이 아픈 지구"
+            android:textColor="#F57676"
+            android:textSize="23dp"
+            tools:ignore="MissingPrefix" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerInParent="true">
-        <ImageView
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_gravity="center"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_earth_borderless"/>
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
         <TextView
-            android:id="@+id/main_activity_level_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="11dp"
+            android:gravity="center"
             android:textColor="@android:color/white"
-            android:textSize="25dp"
-            android:text="Lv 2."
+            android:layout_below="@id/main_activity_planet_container"
             android:layout_gravity="center"
-            fontPath="fonts/NanumSquareBold.ttf"
-            tools:ignore="MissingPrefix"/>
+            android:text="아래 시간만큼 휴대폰을\n사용하지 않으면 레벨업합니다."/>
+        <me.hyemdooly.sangs.dimigo.app.project.view.TextThumbProgressBar
+            android:id="@+id/main_activity_progress"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_below="@id/main_activity_planet_container"
+            android:layout_marginTop="15dp"
+            app:progress_current="61"
+            app:progress_max="100"
+            app:progress_reached_bar_height="1.5dp"
+            app:progress_reached_color="#FFFFFF"
+            app:progress_text_color="#FFFFFF"
+            app:progress_text_offset="5dp"
+            app:progress_text_size="10dp"
+            app:progress_text_visibility="visible"
+            app:progress_unreached_bar_height="1.5dp"
+            app:progress_unreached_color="#20FFFFFF" />
         <TextView
-            android:id="@+id/main_activity_level_humanreadable_text"
+            android:id="@+id/main_activity_total_time_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#F57676"
-            android:textSize="30dp"
-            android:text="많이 아픈 지구"
-            android:layout_marginTop="10dp"
+            android:text="총 3시간 20분"
+            android:textColor="@android:color/white"
+            android:layout_gravity="right"
+            android:layout_marginTop="15dp"
+            android:textSize="11dp"
+            android:layout_marginRight="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="업적과 통계를 보려면 위로 올리세요"
             android:layout_gravity="center"
-            fontPath="fonts/NanumSquareBold.ttf"
-            tools:ignore="MissingPrefix"
-            android:layout_marginBottom="50dp"/>
+            android:textSize="13dp"
+            android:textColor="#40FFFFFF"
+            android:layout_marginTop="30dp"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:srcCompat="@drawable/ic_arrow_down"
+            app:tint="#29C9BD"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"/>
     </LinearLayout>
 </RelativeLayout>

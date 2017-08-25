@@ -10,22 +10,26 @@ import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
+import me.hyemdooly.sangs.dimigo.app.project.view.TextThumbProgressBar
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 class MainActivity : AppCompatActivity() {
 
     private var backpressed : Long = 0
     private val backgroundView by lazy { findViewById<WebView>(R.id.main_activity_background_view) }
+    private val progressBar by lazy { findViewById<TextThumbProgressBar>(R.id.main_activity_progress) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         backgroundView.visibility = View.INVISIBLE
-
         backgroundView.setBackgroundColor(Color.TRANSPARENT)
 
         initBackground()
+
+        progressBar.setProgressTextColor(Color.parseColor("#270F30"))
+        progressBar.setProgressBarText("2시간 46분")
     }
 
     @SuppressLint("SetJavaScriptEnabled")
