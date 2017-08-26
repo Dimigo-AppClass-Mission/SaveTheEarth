@@ -1,5 +1,8 @@
 package me.hyemdooly.sangs.dimigo.app.project.database
 
+import android.app.Activity
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import io.realm.Realm
 import java.util.*
@@ -7,10 +10,10 @@ import java.util.*
 /**
  * Created by songhyemin on 2017. 8. 23..
  */
-class DataController {
+class DataController : Activity() {
     var realm: Realm = Realm.getDefaultInstance()
-
-    // var settingList: RealmResults<Setting>? = realm.where(Setting::class.java).findAll()
+    val user : SharedPreferences = getSharedPreferences("User", Context.MODE_PRIVATE)
+    var userTotalTime : Long = user.getLong("TotalTime", 0)
 
     fun addTimeData(dataName: String, millis: Long, date: Date){
         when(dataName){
@@ -21,8 +24,7 @@ class DataController {
                 realm.beginTransaction()
                 realm.copyToRealm(timeUsed)
                 realm.commitTransaction()
-                Log.d("data", timeUsed.time.toString())
-                Log.d("data", realm.where(TimeUsed::class.java).findAll().lastIndex.toString())
+                Log.d("data_used", timeUsed.time.toString())
 
             }
 
@@ -30,17 +32,19 @@ class DataController {
                 var timeUnUsed: TimeUnUsed = TimeUnUsed()
                 timeUnUsed.date = date
                 timeUnUsed.time = (millis/1000)
+                userTotalTime += timeUnUsed.time as Long
+                user.edit().putLong("TotalTime", userTotalTime)
                 realm.beginTransaction()
                 realm.copyToRealm(timeUnUsed)
                 realm.commitTransaction()
-                Log.d("data", realm.where(TimeUnUsed::class.java).findAll().lastIndex.toString())
+                Log.d("data_unused", timeUnUsed.time.toString())
             }
 
         }
 
     }
 
-    fun initData(achieve : Achieve){
+    fun initAchieveData(achieve : Achieve){
 
         realm.beginTransaction()
         realm.copyToRealm(achieve)
@@ -48,7 +52,11 @@ class DataController {
 
     }
 
-    fun checkData(){
 
-    }
+
+
+
+
+
+
 }

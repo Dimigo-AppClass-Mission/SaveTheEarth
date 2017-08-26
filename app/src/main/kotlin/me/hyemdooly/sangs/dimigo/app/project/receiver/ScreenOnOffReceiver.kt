@@ -3,7 +3,6 @@ package me.hyemdooly.sangs.dimigo.app.project.receiver
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import me.hyemdooly.sangs.dimigo.app.project.database.DataController
 import java.util.*
 
@@ -19,7 +18,6 @@ class ScreenOnOffReceiver : BroadcastReceiver() {
                 lastTime = System.currentTimeMillis()
                 if(!firstTime.equals(0)){
                     countTime = lastTime-firstTime
-                    Log.d("time", countTime.toString())
                     dataController.addTimeData("used", countTime, Date())
                     firstTime = lastTime
                 }
@@ -28,7 +26,6 @@ class ScreenOnOffReceiver : BroadcastReceiver() {
                 lastTime = System.currentTimeMillis()
                 if(!firstTime.equals(0)){
                     countTime = lastTime-firstTime
-                    Log.d("time", countTime.toString())
                     dataController.addTimeData("unused", countTime, Date())
                     firstTime = lastTime
                 }

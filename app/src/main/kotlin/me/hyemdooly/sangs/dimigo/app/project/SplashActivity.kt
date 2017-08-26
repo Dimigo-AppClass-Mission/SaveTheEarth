@@ -23,7 +23,10 @@ class SplashActivity : AppCompatActivity() {
         Realm.setDefaultConfiguration(realmConfiguration)
 
         val test = getSharedPreferences("First", Context.MODE_PRIVATE)
+        val user = getSharedPreferences("User", Context.MODE_PRIVATE)
+
         val firstData = test.getInt("First", 0)
+
 
         if(firstData == 0){
             val controller: DataController = DataController()
@@ -40,7 +43,7 @@ class SplashActivity : AppCompatActivity() {
                 }
                 achieve.state = false
 
-                controller.initData(achieve)
+                controller.initAchieveData(achieve)
                 Log.d("Ach", achieve.purpose.toString())
                 i++
             }
@@ -58,7 +61,7 @@ class SplashActivity : AppCompatActivity() {
                 achieve.title = achieve.purpose.toString()+"시간 동안 휴대폰 사용하지 않기"
                 achieve.state = false
 
-                controller.initData(achieve)
+                controller.initAchieveData(achieve)
                 Log.d("Ach", achieve.purpose.toString())
                 i++
             }
@@ -77,14 +80,16 @@ class SplashActivity : AppCompatActivity() {
                 achieve.title = "하루동안 사용하는 앱 "+achieve.purpose.toString()+"개 이하"
                 achieve.state = false
 
-                controller.initData(achieve)
+                controller.initAchieveData(achieve)
                 Log.d("Ach", achieve.purpose.toString())
                 i++
             }
+            user.edit().putInt("Level", 1)
+            user.edit().putLong("CurrentTime", 0)
+            user.edit().putLong("TotalTime", 0)
+
             test.edit().putInt("First", 1).commit()
         }
-
-
 
         Handler().postDelayed(
                 {
