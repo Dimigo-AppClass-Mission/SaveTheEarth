@@ -18,11 +18,11 @@ import me.hyemdooly.sangs.dimigo.app.project.adapter.MainPagerAdapter
 import me.hyemdooly.sangs.dimigo.app.project.fragment.DetailFragment
 import me.hyemdooly.sangs.dimigo.app.project.fragment.MainFragment
 import me.hyemdooly.sangs.dimigo.app.project.util.getStatusBarHeight
-import me.hyemdooly.sangs.dimigo.app.project.util.setSystemBarTheme
 import me.hyemdooly.sangs.dimigo.app.project.view.VerticalViewPager
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import android.animation.ObjectAnimator
+import me.hyemdooly.sangs.dimigo.app.project.`interface`.OnPagerPageScrollListener
 import me.hyemdooly.sangs.dimigo.app.project.util.convertIntegerToDp
 
 
@@ -39,6 +39,9 @@ class MainActivity : AppCompatActivity() {
     private var evaluator = ArgbEvaluator()
     private val wbColors = intArrayOf(Color.WHITE, Color.BLACK)
     private val pwColors = intArrayOf(Color.parseColor("#270F30"), Color.WHITE)
+
+    private var communicationPagerListener1: OnPagerPageScrollListener? = null
+    private var communicationPagerListener2: OnPagerPageScrollListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,25 +61,12 @@ class MainActivity : AppCompatActivity() {
                 projectTitleText.setTextColor(wbColor)
                 mainContainer.setBackgroundColor(pwColor)
 
-                when(position) {
-                    0 -> {
-                        (pagerAdapter.getPage(0) as MainFragment).backgroundView!!.alpha = 1 - positionOffset
-                        (pagerAdapter.getPage(0) as MainFragment).characterView!!.alpha = 1 - positionOffset
-                        (pagerAdapter.getPage(0) as MainFragment).levelText!!.alpha = 1 - positionOffset
-                        (pagerAdapter.getPage(0) as MainFragment).levelHumanReadableText!!.alpha = 1 - positionOffset
-                        (pagerAdapter.getPage(0) as MainFragment).bottomWidgetContainer!!.alpha = 1 - positionOffset
+                if(communicationPagerListener1 != null) {
+                    communicationPagerListener1!!.onCommunicationWithActivityPagerScrolled(position, positionOffset, positionOffsetPixels)
+                }
 
-                        (pagerAdapter.getPage(1) as DetailFragment).buttonContainer!!.alpha = positionOffset
-                    }
-                    else -> {
-                        (pagerAdapter.getPage(0) as MainFragment).backgroundView!!.alpha = positionOffset
-                        (pagerAdapter.getPage(0) as MainFragment).characterView!!.alpha = positionOffset
-                        (pagerAdapter.getPage(0) as MainFragment).levelText!!.alpha = positionOffset
-                        (pagerAdapter.getPage(0) as MainFragment).levelHumanReadableText!!.alpha = positionOffset
-                        (pagerAdapter.getPage(0) as MainFragment).bottomWidgetContainer!!.alpha = positionOffset
-
-                        (pagerAdapter.getPage(1) as DetailFragment).buttonContainer!!.alpha = 1 - positionOffset
-                    }
+                if(communicationPagerListener2 != null) {
+                    communicationPagerListener2!!.onCommunicationWithActivityPagerScrolled(position, positionOffset, positionOffsetPixels)
                 }
             }
 
@@ -94,48 +84,23 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                when(position) {
-                    0 -> {
-                        (pagerAdapter.getPage(0) as MainFragment).backgroundView!!.alpha = 1.toFloat()
-                        (pagerAdapter.getPage(0) as MainFragment).characterView!!.alpha = 1.toFloat()
-                        (pagerAdapter.getPage(0) as MainFragment).levelText!!.alpha = 1.toFloat()
-                        (pagerAdapter.getPage(0) as MainFragment).levelHumanReadableText!!.alpha = 1.toFloat()
-                        (pagerAdapter.getPage(0) as MainFragment).bottomWidgetContainer!!.alpha = 1.toFloat()
+                if(communicationPagerListener1 != null) {
+                    communicationPagerListener1!!.onCommunicationWithActivityPagerScrollSelected(position)
+                }
 
-                        (pagerAdapter.getPage(1) as DetailFragment).buttonContainer!!.alpha = 0.toFloat()
-
-                        Handler().postDelayed({
-                            val animator = ObjectAnimator.ofFloat((pagerAdapter.getPage(1) as DetailFragment).statsButton!!, "cardElevation", convertIntegerToDp(resources, 4.toFloat()), 0.toFloat())
-                            val animator2 = ObjectAnimator.ofFloat((pagerAdapter.getPage(1) as DetailFragment).archievementButton!!, "cardElevation", convertIntegerToDp(resources, 4.toFloat()), 0.toFloat())
-                            val animator3 = ObjectAnimator.ofFloat((pagerAdapter.getPage(1) as DetailFragment).slideUpPanelContainer!!, "cardElevation", convertIntegerToDp(resources, 2.toFloat()), 0.toFloat())
-
-                            animator.start()
-                            animator2.start()
-                            animator3.start()
-                        }, 500)
-                    }
-                    1 -> {
-                        (pagerAdapter.getPage(0) as MainFragment).backgroundView!!.alpha = 0.toFloat()
-                        (pagerAdapter.getPage(0) as MainFragment).characterView!!.alpha = 0.toFloat()
-                        (pagerAdapter.getPage(0) as MainFragment).levelText!!.alpha = 0.toFloat()
-                        (pagerAdapter.getPage(0) as MainFragment).levelHumanReadableText!!.alpha = 0.toFloat()
-                        (pagerAdapter.getPage(0) as MainFragment).bottomWidgetContainer!!.alpha = 0.toFloat()
-
-                        (pagerAdapter.getPage(1) as DetailFragment).buttonContainer!!.alpha = 1.toFloat()
-
-                        Handler().postDelayed({
-                            val animator = ObjectAnimator.ofFloat((pagerAdapter.getPage(1) as DetailFragment).statsButton!!, "cardElevation", 0.toFloat(), convertIntegerToDp(resources, 4.toFloat()))
-                            val animator2 = ObjectAnimator.ofFloat((pagerAdapter.getPage(1) as DetailFragment).archievementButton!!, "cardElevation", 0.toFloat(), convertIntegerToDp(resources, 4.toFloat()))
-                            val animator3 = ObjectAnimator.ofFloat((pagerAdapter.getPage(1) as DetailFragment).slideUpPanelContainer!!, "cardElevation", 0.toFloat(), convertIntegerToDp(resources, 2.toFloat()))
-
-                            animator.start()
-                            animator2.start()
-                            animator3.start()
-                        }, 500)
-                    }
+                if(communicationPagerListener2 != null) {
+                    communicationPagerListener2!!.onCommunicationWithActivityPagerScrollSelected(position)
                 }
             }
         })
+    }
+
+    fun setOnCommunicationPagerListenerInMain(listener: OnPagerPageScrollListener) {
+        communicationPagerListener1 = listener
+    }
+
+    fun setOnCommunicationPagerListenerInDetail(listener: OnPagerPageScrollListener) {
+        communicationPagerListener2 = listener
     }
 
     override fun attachBaseContext(newBase: Context?) {

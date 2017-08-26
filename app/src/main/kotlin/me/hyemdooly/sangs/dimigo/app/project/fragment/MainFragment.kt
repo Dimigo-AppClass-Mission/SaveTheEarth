@@ -1,9 +1,11 @@
 package me.hyemdooly.sangs.dimigo.app.project.fragment
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,8 +17,10 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.transitionseverywhere.TransitionManager
+import me.hyemdooly.sangs.dimigo.app.project.MainActivity
 
 import me.hyemdooly.sangs.dimigo.app.project.R
+import me.hyemdooly.sangs.dimigo.app.project.`interface`.OnPagerPageScrollListener
 import me.hyemdooly.sangs.dimigo.app.project.util.getNavigationHeight
 import me.hyemdooly.sangs.dimigo.app.project.view.TextThumbProgressBar
 
@@ -56,6 +60,47 @@ class MainFragment: Fragment() {
 
         progressView!!.setProgressTextColor(Color.parseColor("#270F30"))
         progressView!!.setProgressBarText("2시간 46분")
+
+        (activity as MainActivity).setOnCommunicationPagerListenerInMain(object: OnPagerPageScrollListener {
+            override fun onCommunicationWithActivityPagerScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                when(position) {
+                    0 -> {
+                        backgroundView!!.alpha = 1 - positionOffset
+                        characterView!!.alpha = 1 - positionOffset
+                        levelText!!.alpha = 1 - positionOffset
+                        levelHumanReadableText!!.alpha = 1 - positionOffset
+                        bottomWidgetContainer!!.alpha = 1 - positionOffset
+                    }
+                    else -> {
+                        backgroundView!!.alpha = positionOffset
+                        characterView!!.alpha = positionOffset
+                        levelText!!.alpha = positionOffset
+                        levelHumanReadableText!!.alpha = positionOffset
+                        bottomWidgetContainer!!.alpha = positionOffset
+                    }
+                }
+            }
+
+            override fun onCommunicationWithActivityPagerScrollSelected(position: Int) {
+                when(position) {
+                    0 -> {
+                        backgroundView!!.alpha = 1.toFloat()
+                        characterView!!.alpha = 1.toFloat()
+                        levelText!!.alpha = 1.toFloat()
+                        levelHumanReadableText!!.alpha = 1.toFloat()
+                        bottomWidgetContainer!!.alpha = 1.toFloat()
+                    }
+                    1 -> {
+                        backgroundView!!.alpha = 0.toFloat()
+                        characterView!!.alpha = 0.toFloat()
+                        levelText!!.alpha = 0.toFloat()
+                        levelHumanReadableText!!.alpha = 0.toFloat()
+                        bottomWidgetContainer!!.alpha = 0.toFloat()
+                    }
+                }
+            }
+
+        })
 
         return rootView!!
     }
