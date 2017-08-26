@@ -92,6 +92,72 @@
             </RelativeLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/detail_fragment_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/detail_activity_tab_button_container"/>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/detail_fragment_bottom_slide_panel_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        app:cardCornerRadius="5dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/detail_fragment_bottom_slide_panel_character"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_earth"
+                android:adjustViewBounds="true"
+                android:layout_margin="10dp"
+                android:layout_centerVertical="true" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/detail_fragment_bottom_slide_panel_character"
+                android:layout_marginLeft="5dp"
+                android:orientation="vertical"
+                android:layout_centerVertical="true">
+                <TextView
+                    android:id="@+id/detail_fragment_bottom_slide_panel_level_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lv. 2"
+                    android:textColor="#626262"
+                    android:textSize="12dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/detail_fragment_bottom_slide_panel_readable_level_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="많이 아픈 지구"
+                        android:textColor="#FC3C3C"
+                        android:textSize="12dp"/>
+                    <TextView
+                        android:id="@+id/detail_fragment_bottom_slide_panel_readable_small_time_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(레벨업까지 휴대폰 사용 안하기. 2시간 17분)"
+                        android:textColor="#626262"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="8dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 </RelativeLayout>
 <!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"

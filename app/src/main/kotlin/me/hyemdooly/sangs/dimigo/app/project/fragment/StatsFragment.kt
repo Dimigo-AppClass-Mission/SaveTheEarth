@@ -12,9 +12,6 @@ import me.hyemdooly.sangs.dimigo.app.project.R
 
 class StatsFragment : Fragment() {
 
-
-    private var mListener: OnFragmentInteractionListener? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -28,26 +25,4 @@ class StatsFragment : Fragment() {
 
         return inflater!!.inflate(R.layout.fragment_stats, container, false)
     }
-
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            mListener = context
-        } else {
-            throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        mListener = null
-    }
-
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
-    }
-
-
 }

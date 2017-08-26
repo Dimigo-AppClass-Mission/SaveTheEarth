@@ -107,8 +107,11 @@ class MainActivity : AppCompatActivity() {
                         Handler().postDelayed({
                             val animator = ObjectAnimator.ofFloat((pagerAdapter.getPage(1) as DetailFragment).statsButton!!, "cardElevation", convertIntegerToDp(resources, 4.toFloat()), 0.toFloat())
                             val animator2 = ObjectAnimator.ofFloat((pagerAdapter.getPage(1) as DetailFragment).archievementButton!!, "cardElevation", convertIntegerToDp(resources, 4.toFloat()), 0.toFloat())
+                            val animator3 = ObjectAnimator.ofFloat((pagerAdapter.getPage(1) as DetailFragment).slideUpPanelContainer!!, "cardElevation", convertIntegerToDp(resources, 2.toFloat()), 0.toFloat())
+
                             animator.start()
                             animator2.start()
+                            animator3.start()
                         }, 500)
                     }
                     1 -> {
@@ -123,8 +126,11 @@ class MainActivity : AppCompatActivity() {
                         Handler().postDelayed({
                             val animator = ObjectAnimator.ofFloat((pagerAdapter.getPage(1) as DetailFragment).statsButton!!, "cardElevation", 0.toFloat(), convertIntegerToDp(resources, 4.toFloat()))
                             val animator2 = ObjectAnimator.ofFloat((pagerAdapter.getPage(1) as DetailFragment).archievementButton!!, "cardElevation", 0.toFloat(), convertIntegerToDp(resources, 4.toFloat()))
+                            val animator3 = ObjectAnimator.ofFloat((pagerAdapter.getPage(1) as DetailFragment).slideUpPanelContainer!!, "cardElevation", 0.toFloat(), convertIntegerToDp(resources, 2.toFloat()))
+
                             animator.start()
                             animator2.start()
+                            animator3.start()
                         }, 500)
                     }
                 }

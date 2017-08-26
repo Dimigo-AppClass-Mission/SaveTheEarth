@@ -37,8 +37,8 @@ class DetailActivity : AppCompatActivity() {
         achieveButton = findViewById(R.id.achieve_button)
 
         viewPager = findViewById(R.id.view_pager)
-        var adapter: me.hyemdooly.sangs.dimigo.app.project.adapter.PagerAdapter
-                = me.hyemdooly.sangs.dimigo.app.project.adapter.PagerAdapter(supportFragmentManager)
+        var adapter: me.hyemdooly.sangs.dimigo.app.project.adapter.DetailPagerAdapter
+                = me.hyemdooly.sangs.dimigo.app.project.adapter.DetailPagerAdapter(supportFragmentManager)
 
         viewPager.adapter = adapter
 
