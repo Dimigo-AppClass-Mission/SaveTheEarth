@@ -2,29 +2,21 @@ package me.hyemdooly.sangs.dimigo.app.project
 
 import android.animation.ArgbEvaluator
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
-import android.view.View
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
-
+import me.hyemdooly.sangs.dimigo.app.project.`interface`.OnPagerPageScrollListener
 import me.hyemdooly.sangs.dimigo.app.project.adapter.MainPagerAdapter
-import me.hyemdooly.sangs.dimigo.app.project.fragment.DetailFragment
-import me.hyemdooly.sangs.dimigo.app.project.fragment.MainFragment
+import me.hyemdooly.sangs.dimigo.app.project.service.ScreenOnOffService
 import me.hyemdooly.sangs.dimigo.app.project.util.getStatusBarHeight
 import me.hyemdooly.sangs.dimigo.app.project.view.VerticalViewPager
-
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
-import android.animation.ObjectAnimator
-import me.hyemdooly.sangs.dimigo.app.project.`interface`.OnPagerPageScrollListener
-import me.hyemdooly.sangs.dimigo.app.project.util.convertIntegerToDp
-
 
 class MainActivity : AppCompatActivity() {
     private var backPressed: Long = 0
@@ -46,6 +38,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        var intent: Intent = Intent(this@MainActivity, ScreenOnOffService::class.java)
+        startService(intent)
+
 
         pagerView.adapter = pagerAdapter
 
