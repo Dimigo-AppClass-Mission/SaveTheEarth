@@ -29,9 +29,9 @@ class SplashActivity : AppCompatActivity() {
 
 
         if(firstData == 0){
-            val controller: DataController = DataController()
+            val controller = DataController(this)
             var i = 1
-            var achieve: Achieve = Achieve()
+            var achieve = Achieve()
             while (i < 7){
                 achieve.sequence = i
                 achieve.categoryId = 1

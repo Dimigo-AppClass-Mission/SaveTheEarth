@@ -43,4 +43,5 @@ dependencies {
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     implementation 'com.github.glomadrian:Grav:1.1'
     implementation "com.andkulikov:transitionseverywhere:1.7.5"
+    implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
 }

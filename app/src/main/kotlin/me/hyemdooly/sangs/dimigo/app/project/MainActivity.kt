@@ -38,9 +38,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var intent: Intent = Intent(this@MainActivity, ScreenOnOffService::class.java)
+        val intent = Intent(this@MainActivity, ScreenOnOffService::class.java)
         startService(intent)
-
 
         pagerView.adapter = pagerAdapter
 

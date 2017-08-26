@@ -10,10 +10,15 @@ import java.util.*
 /**
  * Created by songhyemin on 2017. 8. 23..
  */
-class DataController : Activity() {
+class DataController {
     var realm: Realm = Realm.getDefaultInstance()
-    val user : SharedPreferences = getSharedPreferences("User", Context.MODE_PRIVATE)
-    var userTotalTime : Long = user.getLong("TotalTime", 0)
+    var user: SharedPreferences? = null
+    var userTotalTime : Long = 0.toLong()
+
+    constructor(context: Context) {
+        user = context.getSharedPreferences("User", Context.MODE_PRIVATE)
+        userTotalTime = user!!.getLong("TotalTime", 0)
+    }
 
     fun addTimeData(dataName: String, millis: Long, date: Date){
         when(dataName){
@@ -33,7 +38,7 @@ class DataController : Activity() {
                 timeUnUsed.date = date
                 timeUnUsed.time = (millis/1000)
                 userTotalTime += timeUnUsed.time as Long
-                user.edit().putLong("TotalTime", userTotalTime)
+                user!!.edit().putLong("TotalTime", userTotalTime).apply()
                 realm.beginTransaction()
                 realm.copyToRealm(timeUnUsed)
                 realm.commitTransaction()
