@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -14,12 +15,16 @@ import android.widget.TextView
 import android.widget.Toast
 
 import me.hyemdooly.sangs.dimigo.app.project.adapter.MainPagerAdapter
+import me.hyemdooly.sangs.dimigo.app.project.fragment.DetailFragment
 import me.hyemdooly.sangs.dimigo.app.project.fragment.MainFragment
 import me.hyemdooly.sangs.dimigo.app.project.util.getStatusBarHeight
 import me.hyemdooly.sangs.dimigo.app.project.util.setSystemBarTheme
 import me.hyemdooly.sangs.dimigo.app.project.view.VerticalViewPager
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
+import android.animation.ObjectAnimator
+import me.hyemdooly.sangs.dimigo.app.project.util.convertIntegerToDp
+
 
 class MainActivity : AppCompatActivity() {
     private var backPressed: Long = 0
@@ -60,6 +65,8 @@ class MainActivity : AppCompatActivity() {
                         (pagerAdapter.getPage(0) as MainFragment).levelText!!.alpha = 1 - positionOffset
                         (pagerAdapter.getPage(0) as MainFragment).levelHumanReadableText!!.alpha = 1 - positionOffset
                         (pagerAdapter.getPage(0) as MainFragment).bottomWidgetContainer!!.alpha = 1 - positionOffset
+
+                        (pagerAdapter.getPage(1) as DetailFragment).buttonContainer!!.alpha = positionOffset
                     }
                     else -> {
                         (pagerAdapter.getPage(0) as MainFragment).backgroundView!!.alpha = positionOffset
@@ -67,11 +74,10 @@ class MainActivity : AppCompatActivity() {
                         (pagerAdapter.getPage(0) as MainFragment).levelText!!.alpha = positionOffset
                         (pagerAdapter.getPage(0) as MainFragment).levelHumanReadableText!!.alpha = positionOffset
                         (pagerAdapter.getPage(0) as MainFragment).bottomWidgetContainer!!.alpha = positionOffset
+
+                        (pagerAdapter.getPage(1) as DetailFragment).buttonContainer!!.alpha = 1 - positionOffset
                     }
                 }
-
-
-                Log.e("onPageScrolled", "$positionOffset")
             }
 
             override fun onPageSelected(position: Int) {
@@ -95,6 +101,15 @@ class MainActivity : AppCompatActivity() {
                         (pagerAdapter.getPage(0) as MainFragment).levelText!!.alpha = 1.toFloat()
                         (pagerAdapter.getPage(0) as MainFragment).levelHumanReadableText!!.alpha = 1.toFloat()
                         (pagerAdapter.getPage(0) as MainFragment).bottomWidgetContainer!!.alpha = 1.toFloat()
+
+                        (pagerAdapter.getPage(1) as DetailFragment).buttonContainer!!.alpha = 0.toFloat()
+
+                        Handler().postDelayed({
+                            val animator = ObjectAnimator.ofFloat((pagerAdapter.getPage(1) as DetailFragment).statsButton!!, "cardElevation", convertIntegerToDp(resources, 4.toFloat()), 0.toFloat())
+                            val animator2 = ObjectAnimator.ofFloat((pagerAdapter.getPage(1) as DetailFragment).archievementButton!!, "cardElevation", convertIntegerToDp(resources, 4.toFloat()), 0.toFloat())
+                            animator.start()
+                            animator2.start()
+                        }, 500)
                     }
                     1 -> {
                         (pagerAdapter.getPage(0) as MainFragment).backgroundView!!.alpha = 0.toFloat()
@@ -102,6 +117,15 @@ class MainActivity : AppCompatActivity() {
                         (pagerAdapter.getPage(0) as MainFragment).levelText!!.alpha = 0.toFloat()
                         (pagerAdapter.getPage(0) as MainFragment).levelHumanReadableText!!.alpha = 0.toFloat()
                         (pagerAdapter.getPage(0) as MainFragment).bottomWidgetContainer!!.alpha = 0.toFloat()
+
+                        (pagerAdapter.getPage(1) as DetailFragment).buttonContainer!!.alpha = 1.toFloat()
+
+                        Handler().postDelayed({
+                            val animator = ObjectAnimator.ofFloat((pagerAdapter.getPage(1) as DetailFragment).statsButton!!, "cardElevation", 0.toFloat(), convertIntegerToDp(resources, 4.toFloat()))
+                            val animator2 = ObjectAnimator.ofFloat((pagerAdapter.getPage(1) as DetailFragment).archievementButton!!, "cardElevation", 0.toFloat(), convertIntegerToDp(resources, 4.toFloat()))
+                            animator.start()
+                            animator2.start()
+                        }, 500)
                     }
                 }
             }

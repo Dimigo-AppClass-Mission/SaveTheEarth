@@ -17,7 +17,7 @@ import me.hyemdooly.sangs.dimigo.app.project.fragment.AchieveFragment
 import me.hyemdooly.sangs.dimigo.app.project.fragment.StatsFragment
 import me.hyemdooly.sangs.dimigo.app.project.service.ScreenOnOffService
 
-class DetailActivity : AppCompatActivity(), AchieveFragment.OnFragmentInteractionListener, StatsFragment.OnFragmentInteractionListener {
+class DetailActivity : AppCompatActivity() {
 
     private var backpressed: Long = 0
     lateinit var viewPager: ViewPager
@@ -26,9 +26,9 @@ class DetailActivity : AppCompatActivity(), AchieveFragment.OnFragmentInteractio
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        setContentView(R.layout.fragment_detail)
 
-        setStatusBar(this@DetailActivity, Color.WHITE)
+        /*setStatusBar(this@DetailActivity, Color.WHITE)
 
         var intent: Intent = Intent(this@DetailActivity, ScreenOnOffService::class.java)
         startService(intent)
@@ -68,13 +68,13 @@ class DetailActivity : AppCompatActivity(), AchieveFragment.OnFragmentInteractio
                 }
             }
 
-        })
+        })*/
 
 
     }
 
 
-    fun onClick(v: View){
+    /*fun onClick(v: View){
         when(v.id){
             R.id.stats_button -> {
                 viewPager.currentItem = 0
@@ -117,7 +117,7 @@ class DetailActivity : AppCompatActivity(), AchieveFragment.OnFragmentInteractio
         }
         backpressed = System.currentTimeMillis()
 
-    }
+    }*/
 
 
 }
