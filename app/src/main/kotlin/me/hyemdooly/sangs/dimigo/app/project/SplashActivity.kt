@@ -35,12 +35,18 @@ class SplashActivity : AppCompatActivity() {
             while (i < 7){
                 achieve.sequence = i
                 achieve.categoryId = 1
-                achieve.title = "레벨 "+i.toString()+" 달성"
-                if(i == 1){
-                    achieve.purpose = 3
+                if (i == 6){
+                    achieve.title = "끝까지 달성 완료!"
+                    achieve.purpose = 0
                 }else{
-                    achieve.purpose = achieve.purpose?.times(2)
+                    achieve.title = "레벨 "+(i+1).toString()+" 달성"
+                    if(i == 1){
+                        achieve.purpose = 3
+                    }else{
+                        achieve.purpose = achieve.purpose?.times(2)
+                    }
                 }
+
                 achieve.state = false
 
                 controller.initAchieveData(achieve)

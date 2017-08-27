@@ -1,6 +1,5 @@
 package me.hyemdooly.sangs.dimigo.app.project.database
 
-import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
@@ -13,7 +12,7 @@ import java.util.*
 class DataController {
     var realm: Realm = Realm.getDefaultInstance()
     var user: SharedPreferences? = null
-    var userTotalTime : Long = 0.toLong()
+    var userTotalTime : Long = 0.toLong() // 안쓴 총 시간
 
     constructor(context: Context) {
         user = context.getSharedPreferences("User", Context.MODE_PRIVATE)
@@ -39,6 +38,7 @@ class DataController {
                 timeUnUsed.time = (millis/1000)
                 userTotalTime += timeUnUsed.time as Long
                 user!!.edit().putLong("TotalTime", userTotalTime).apply()
+                Log.d("total_unusedData", (user as SharedPreferences).getLong("TotalTime", 0).toString())
                 realm.beginTransaction()
                 realm.copyToRealm(timeUnUsed)
                 realm.commitTransaction()

@@ -19,6 +19,7 @@ class RecyclerAdapter(context: Context, items: List<Item>) : RecyclerView.Adapte
     var items: List<Item> = items
     var palette: List<String> = listOf("#7ADBD1", "#78B2D9","#9070D9")
 
+
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         var item: Item = items[position]
 
@@ -27,7 +28,7 @@ class RecyclerAdapter(context: Context, items: List<Item>) : RecyclerView.Adapte
         }
         holder?.titleText?.text = item.titleText
         holder?.purposeText?.text = item.purposeText
-        holder?.counterText?.text = (item.counterText/60000).toString()+"분"
+        holder?.counterText?.text = item.counterText
 
 
     }
