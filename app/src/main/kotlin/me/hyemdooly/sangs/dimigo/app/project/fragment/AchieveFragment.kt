@@ -22,26 +22,26 @@ class AchieveFragment : Fragment() {
         val realm: Realm = Realm.getDefaultInstance()
         val user = context.getSharedPreferences("User", Context.MODE_PRIVATE)
 
-        var rootView :View = inflater!!.inflate(R.layout.fragment_achieve, container, false)
+        var rootView: View = inflater!!.inflate(R.layout.fragment_achieve, container, false)
 
         var recyclerView: RecyclerView = rootView.findViewById(R.id.recycler_view)
 
-        var layoutManager: LinearLayoutManager = LinearLayoutManager(rootView.context)
+        var layoutManager = LinearLayoutManager(rootView.context)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = layoutManager
 
         var firstAchieve: Achieve? = realm.where(Achieve::class.java).equalTo("categoryId", 1)
-                                                    .equalTo("state",false).findFirst()
+                .equalTo("state", false).findFirst()
         var secondAchieve: Achieve? = realm.where(Achieve::class.java).equalTo("categoryId", 2)
-                .equalTo("state",false).findFirst()
+                .equalTo("state", false).findFirst()
         var thirdAchieve: Achieve? = realm.where(Achieve::class.java).equalTo("categoryId", 3)
-                .equalTo("state",false).findFirst()
+                .equalTo("state", false).findFirst()
 
         var items: List<Item> = listOf(Item("시간", firstAchieve!!.title.toString(),
-                user.getLong("TotalTime", 0).div(60).toString()+"분/"+
-                        firstAchieve!!.purpose!!.times(60).toString()+"분"),
+                user.getLong("TotalTime", 0).div(60).toString() + "분/" +
+                        firstAchieve!!.purpose!!.times(60).toString() + "분"),
                 Item("레벨", secondAchieve!!.title.toString(),
-                        user.getLong("TotalTime", 0).div(60).toString()+"분/"+secondAchieve!!.purpose!!.times(60).toString()+"분"),
+                        user.getLong("TotalTime", 0).div(60).toString() + "분/" + secondAchieve!!.purpose!!.times(60).toString() + "분"),
                 Item("앱 사용 제약조건", thirdAchieve!!.title.toString(), thirdAchieve!!.purpose.toString()))
 
         recyclerView.adapter = RecyclerAdapter(context, items)

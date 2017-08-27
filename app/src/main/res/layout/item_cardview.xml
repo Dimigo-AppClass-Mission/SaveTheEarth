@@ -9,8 +9,9 @@
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
         android:layout_margin="10dp">
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -24,20 +25,19 @@
                 android:padding="9dp">
 
                 <ImageView
-                    android:id="@+id/ic_clock"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     app:srcCompat="@drawable/ic_watch"
-                    android:layout_marginRight="10dp"
-                    />
+                    android:layout_marginRight="10dp" />
 
                 <TextView
                     android:id="@+id/card_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="시간"
-                    android:layout_toRightOf="@+id/ic_clock"
-                    android:layout_toEndOf="@+id/ic_clock"
+                    android:layout_toRightOf="@+id/icon"
+                    android:layout_toEndOf="@+id/icon"
                     android:layout_centerVertical="true"
                     fontPath="fonts/NanumSquareBold.ttf"
                     tools:ignore="MissingPrefix"
@@ -78,14 +78,20 @@
 
 
             </RelativeLayout>
-
-
+            <RelativeLayout
+                android:id="@+id/item_cardview_block_achieve"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#90000000"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="레벨 5부터 업적을 달성할 수 있습니다!"
+                    android:textColor="@android:color/white"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
         </RelativeLayout>
-
-
-
-
-
     </android.support.v7.widget.CardView>
 
 

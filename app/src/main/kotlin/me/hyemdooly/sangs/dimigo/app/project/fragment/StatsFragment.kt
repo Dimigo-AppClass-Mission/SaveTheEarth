@@ -1,5 +1,8 @@
 package me.hyemdooly.sangs.dimigo.app.project.fragment
 
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -8,11 +11,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import lecho.lib.hellocharts.view.LineChartView
 
 import me.hyemdooly.sangs.dimigo.app.project.R
-import android.R.attr.data
 import lecho.lib.hellocharts.model.*
+import me.hyemdooly.sangs.dimigo.app.project.database.DataController
 
 
 class StatsFragment : Fragment() {
@@ -21,17 +25,26 @@ class StatsFragment : Fragment() {
     private var dateFilter: AppCompatSpinner? = null
     private var timeUsedFilter: AppCompatSpinner? = null
     private var chart: LineChartView? = null
+    private var usedTimeText: TextView? = null
+    private var unusedTimeText: TextView? = null
 
     private var dateFilterListObj: ArrayList<String> = ArrayList()
     private var timeUsedFilterListObj: ArrayList<String> = ArrayList()
+    private var dataController: DataController? = null
+    private var user: SharedPreferences? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         rootView = inflater!!.inflate(R.layout.fragment_stats, null, false)
 
+        dataController = DataController(activity)
+        user = context.getSharedPreferences("User", Context.MODE_PRIVATE)
+
         dateFilter = rootView!!.findViewById(R.id.stats_fragment_time_filter)
         timeUsedFilter = rootView!!.findViewById(R.id.stats_fragment_usedtime_filter)
         chart = rootView!!.findViewById(R.id.stats_fragment_chart)
+        usedTimeText = rootView!!.findViewById(R.id.stats_fragment_used_time_text)
+        unusedTimeText = rootView!!.findViewById(R.id.stats_fragment_unused_time_text)
 
         val dateFilterAdapter = ArrayAdapter<String>(activity, R.layout.item_spinner, dateFilterListObj)
         val timeUsedFilterAdapter = ArrayAdapter<String>(activity, R.layout.item_spinner, timeUsedFilterListObj)
@@ -41,6 +54,7 @@ class StatsFragment : Fragment() {
         timeUsedFilter!!.adapter = timeUsedFilterAdapter
 
         initChart()
+        loadTimeStats()
 
         return rootView!!
     }
@@ -114,5 +128,13 @@ class StatsFragment : Fragment() {
         chart!!.isZoomEnabled = false
         chart!!.isInteractive = true
         chart!!.lineChartData = data
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun loadTimeStats() {
+        val usedTime = user!!.getLong("UnTotalTime", 0).toString()
+        val unusedTime = user!!.getLong("TotalTime", 0).div(60).toString()
+        usedTimeText!!.text = usedTime + "분"
+        unusedTimeText!!.text = unusedTime + "분"
     }
 }

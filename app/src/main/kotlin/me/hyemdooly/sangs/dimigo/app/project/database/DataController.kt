@@ -13,6 +13,7 @@ class DataController {
     var realm: Realm = Realm.getDefaultInstance()
     var user: SharedPreferences? = null
     var userTotalTime : Long = 0.toLong() // 안쓴 총 시간
+    var userTotalTime2 : Long = 0.toLong()
 //    var purposeAchieve1 = realm.where(Achieve::class.java).equalTo("state", false).equalTo("categoryId", 1).findFirst()
 //    var purposeAchieve2 = realm.where(Achieve::class.java).equalTo("state", false).equalTo("categoryId", 2).findFirst()
 
@@ -27,11 +28,12 @@ class DataController {
                 var timeUsed: TimeUsed = TimeUsed()
                 timeUsed.date = date
                 timeUsed.time = (millis/1000)
+                userTotalTime2 += timeUsed.time as Long
+                user!!.edit().putLong("UnTotalTime", userTotalTime2).apply()
                 realm.beginTransaction()
                 realm.copyToRealm(timeUsed)
                 realm.commitTransaction()
                 Log.d("data_used", timeUsed.time.toString())
-
             }
 
             "unused" -> {
@@ -57,12 +59,4 @@ class DataController {
         realm.copyToRealm(achieve)
         realm.commitTransaction()
     }
-
-
-
-
-
-
-
-
 }

@@ -2,9 +2,11 @@ package me.hyemdooly.sangs.dimigo.app.project.fragment
 
 import android.animation.ObjectAnimator
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.CardView
@@ -138,19 +140,19 @@ class DetailFragment: Fragment() {
     private fun setButtonFocusStatus(isStatButton: Boolean) {
         if(isStatButton) {
             statsButton!!.setCardBackgroundColor(Color.parseColor("#29C9BD"))
-            statsButtonIcon!!.setColorFilter(Color.WHITE)
+            statsButtonIcon!!.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
             statsButtonText!!.setTextColor(Color.WHITE)
 
             achievementButton!!.setCardBackgroundColor(Color.parseColor("#FFFFFF"))
-            achievementButtonIcon!!.setColorFilter(Color.parseColor("#C0C9CF"))
+            achievementButtonIcon!!.setColorFilter(Color.parseColor("#C0C9CF"), PorterDuff.Mode.SRC_IN)
             achievementButtonText!!.setTextColor(Color.parseColor("#C0C9CF"))
         } else {
             statsButton!!.setCardBackgroundColor(Color.parseColor("#FFFFFF"))
-            statsButtonIcon!!.setColorFilter(Color.parseColor("#C0C9CF"))
+            statsButtonIcon!!.setColorFilter(Color.parseColor("#C0C9CF"), PorterDuff.Mode.SRC_IN)
             statsButtonText!!.setTextColor(Color.parseColor("#C0C9CF"))
 
             achievementButton!!.setCardBackgroundColor(Color.parseColor("#29C9BD"))
-            achievementButtonIcon!!.setColorFilter(Color.WHITE)
+            achievementButtonIcon!!.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
             achievementButtonText!!.setTextColor(Color.WHITE)
         }
     }

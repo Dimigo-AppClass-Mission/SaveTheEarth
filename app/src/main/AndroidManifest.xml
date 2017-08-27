@@ -21,11 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailActivity">
-
-        </activity>
-        <service android:name=".service.ScreenOnOffService"></service>
-        <receiver android:name=".receiver.ScreenOnOffReceiver"></receiver>
+        <service android:name=".service.STERealtimeService" />
+        <receiver android:name=".receiver.ScreenOnOffReceiver" />
     </application>
 
 </manifest>

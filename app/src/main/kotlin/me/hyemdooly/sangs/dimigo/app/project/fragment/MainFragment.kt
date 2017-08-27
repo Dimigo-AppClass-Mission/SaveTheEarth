@@ -2,11 +2,14 @@ package me.hyemdooly.sangs.dimigo.app.project.fragment
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,10 +20,12 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.transitionseverywhere.TransitionManager
+import io.realm.Realm
 import me.hyemdooly.sangs.dimigo.app.project.MainActivity
 
 import me.hyemdooly.sangs.dimigo.app.project.R
 import me.hyemdooly.sangs.dimigo.app.project.`interface`.OnPagerPageScrollListener
+import me.hyemdooly.sangs.dimigo.app.project.database.Achieve
 import me.hyemdooly.sangs.dimigo.app.project.util.getNavigationHeight
 import me.hyemdooly.sangs.dimigo.app.project.view.TextThumbProgressBar
 
@@ -40,8 +45,12 @@ class MainFragment: Fragment() {
     var progressView: TextThumbProgressBar? = null
     var totalTimeText: TextView? = null
 
+    var user: SharedPreferences? = null
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater!!.inflate(R.layout.fragment_main, null, false)
+
+        user = context.getSharedPreferences("User", Context.MODE_PRIVATE)
 
         mainContainer = rootView!!.findViewById(R.id.main_fragment_root_view)
         backgroundView = rootView!!.findViewById(R.id.main_fragment_background_view)
@@ -102,6 +111,8 @@ class MainFragment: Fragment() {
 
         })
 
+        checkLevel()
+
         return rootView!!
     }
 
@@ -132,6 +143,69 @@ class MainFragment: Fragment() {
             val p = v.layoutParams as ViewGroup.MarginLayoutParams
             p.setMargins(0, 0, 0, getNavigationHeight(activity))
             v.requestLayout()
+        }
+    }
+
+    private fun checkLevel() {
+        val realm: Realm = Realm.getDefaultInstance()
+        val level: Achieve = realm.where(Achieve::class.java).equalTo("categoryId", 1)
+                .equalTo("state", false).findFirst()
+
+        characterView!!.scaleType = ImageView.ScaleType.CENTER_INSIDE
+
+        val usedTime = user!!.getLong("UnTotalTime", 0).toString()
+        val unusedTime = user!!.getLong("TotalTime", 0).div(60).toString()
+
+        when(level.title) {
+            "레벨 2 달성하기" -> {
+                characterView!!.setImageResource(R.drawable.ic_earth_level1)
+                levelText!!.text = "Lv. 1"
+                progressView!!.setProgressBarText(unusedTime + "분")
+                progressView!!.progress = unusedTime.toInt().div(180) * 100 + 3
+                totalTimeText!!.text = "누적 3시간"
+            }
+            "레벨 3 달성하기" -> {
+                characterView!!.setImageResource(R.drawable.ic_earth_level2)
+                levelText!!.text = "Lv. 2"
+                levelHumanReadableText!!.text = "조금 나아진 많이 아픈 지구"
+                progressView!!.setProgressBarText(unusedTime + "분")
+                progressView!!.progress = unusedTime.toInt().div(540) * 100 + 3
+                totalTimeText!!.text = "누적 6시간"
+            }
+            "레벨 4 달성하기" -> {
+                characterView!!.setImageResource(R.drawable.ic_earth_level3)
+                levelText!!.text = "Lv. 3"
+                levelHumanReadableText!!.text = "아픈 지구"
+                progressView!!.setProgressBarText(unusedTime + "분")
+                progressView!!.progress = unusedTime.toInt().div(1260) * 100 + 3
+                totalTimeText!!.text = "누적 21시간"
+            }
+            "레벨 5 달성하기" -> {
+                characterView!!.setImageResource(R.drawable.ic_earth_level4)
+                levelText!!.text = "Lv. 4"
+                levelHumanReadableText!!.text = "치유중인 아픈 지구"
+                levelHumanReadableText!!.text = "아픈 지구"
+                progressView!!.setProgressBarText(unusedTime + "분")
+                progressView!!.progress = unusedTime.toInt().div(2700) * 100 + 3
+                totalTimeText!!.text = "누적 45시간"
+            }
+            "레벨 6 달성하기" -> {
+                characterView!!.setImageResource(R.drawable.ic_earth_level5)
+                levelText!!.text = "Lv. 5"
+                levelHumanReadableText!!.text = "지구"
+                progressView!!.setProgressBarText(unusedTime + "분")
+                progressView!!.progress = unusedTime.toInt().div(4400) * 100 + 3
+                totalTimeText!!.text = "누적 76시간"
+            }
+            else -> {
+                characterView!!.setImageResource(R.drawable.ic_earth_level6)
+                levelText!!.text = "Lv. 6"
+                levelHumanReadableText!!.text = "건강한 지구"
+                levelHumanReadableText!!.text = "지구"
+                progressView!!.setProgressBarText("")
+                progressView!!.progress = 100
+                totalTimeText!!.text = "꾸준히 유지해주세요!"
+            }
         }
     }
 }

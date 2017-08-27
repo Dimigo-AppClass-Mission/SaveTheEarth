@@ -92,14 +92,14 @@
                 android:id="@+id/stats_fragment_filter_color_1_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="어제"
+                android:text="해당 데이터는 샘플데이터입니다. 합계 산출 후 나옵니다."
                 android:textSize="12dp"
                 android:textColor="#C0C9CF"/>
             <TextView
                 android:id="@+id/stats_fragment_filter_color_2_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="오늘"
+                android:text=""
                 android:textSize="12dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="#29C9BD"/>
@@ -131,12 +131,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="오늘 총 사용한 시간"
+                    android:text="총 사용한 시간"
                     android:textColor="#818181"
                     android:textSize="13dp"
                     fontPath="fonts/NanumSquareBold.ttf"
                     tools:ignore="MissingPrefix" />
                 <TextView
+                    android:id="@+id/stats_fragment_used_time_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="37분"
@@ -155,12 +156,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="오늘 총 사용안한 시간"
+                    android:text="총 사용안한 시간"
                     android:textColor="#818181"
                     android:textSize="13dp"
                     fontPath="fonts/NanumSquareBold.ttf"
                     tools:ignore="MissingPrefix" />
                 <TextView
+                    android:id="@+id/stats_fragment_unused_time_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="216분"

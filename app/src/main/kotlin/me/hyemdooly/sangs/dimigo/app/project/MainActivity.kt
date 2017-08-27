@@ -13,7 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import me.hyemdooly.sangs.dimigo.app.project.`interface`.OnPagerPageScrollListener
 import me.hyemdooly.sangs.dimigo.app.project.adapter.MainPagerAdapter
-import me.hyemdooly.sangs.dimigo.app.project.service.ScreenOnOffService
+import me.hyemdooly.sangs.dimigo.app.project.service.STERealtimeService
 import me.hyemdooly.sangs.dimigo.app.project.util.getStatusBarHeight
 import me.hyemdooly.sangs.dimigo.app.project.view.VerticalViewPager
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val intent = Intent(this@MainActivity, ScreenOnOffService::class.java)
+        val intent = Intent(this@MainActivity, STERealtimeService::class.java)
         startService(intent)
 
         pagerView.adapter = pagerAdapter
