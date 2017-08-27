@@ -13,6 +13,7 @@ class DataController {
     var realm: Realm = Realm.getDefaultInstance()
     var user: SharedPreferences? = null
     var userTotalTime : Long = 0.toLong() // 안쓴 총 시간
+    var purposeAchieve : Achieve? = realm.where(Achieve::class.java).equalTo("state", false).findFirst()
 
     constructor(context: Context) {
         user = context.getSharedPreferences("User", Context.MODE_PRIVATE)
@@ -43,6 +44,13 @@ class DataController {
                 realm.copyToRealm(timeUnUsed)
                 realm.commitTransaction()
                 Log.d("data_unused", timeUnUsed.time.toString())
+                if(user!!.getLong("TotalTime", userTotalTime).div(60).toInt() >= purposeAchieve!!.purpose!!.times(60)){
+                    purposeAchieve!!.state = true
+                    realm.beginTransaction()
+                    realm.copyToRealmOrUpdate(purposeAchieve)
+                    realm.commitTransaction()
+                    purposeAchieve = realm.where(Achieve::class.java).equalTo("state", false).findFirst()
+                }
             }
 
         }
@@ -50,11 +58,9 @@ class DataController {
     }
 
     fun initAchieveData(achieve : Achieve){
-
         realm.beginTransaction()
         realm.copyToRealm(achieve)
         realm.commitTransaction()
-
     }
 
 

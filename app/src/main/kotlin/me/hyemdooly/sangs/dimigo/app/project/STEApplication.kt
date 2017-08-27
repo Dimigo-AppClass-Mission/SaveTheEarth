@@ -10,5 +10,6 @@ class STEApplication: Application() {
         CalligraphyConfig.initDefault(CalligraphyConfig.Builder()
                 .setDefaultFontPath("fonts/NanumSquareRegular.ttf")
                 .build())
+
     }
 }

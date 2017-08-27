@@ -25,6 +25,7 @@
 
         </activity>
         <service android:name=".service.ScreenOnOffService"></service>
+        <!--<service android:name=".service.CheckService"></service>-->
         <receiver android:name=".receiver.ScreenOnOffReceiver"></receiver>
     </application>
 

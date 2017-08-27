@@ -3,6 +3,7 @@ package me.hyemdooly.sangs.dimigo.app.project.service
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
+import android.util.Log
 import io.realm.Realm
 import io.realm.RealmChangeListener
 import io.realm.RealmResults
@@ -29,6 +30,7 @@ class CheckService() : Service() {
 
         achieve?.addChangeListener(RealmChangeListener<RealmResults<Achieve>> {
             // notify!
+            Log.d("change", realm.where(Achieve::class.java).findFirst().title.toString())
         })
 
 
