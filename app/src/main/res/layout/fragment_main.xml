@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Lv 2."
+            android:text="Lv 1."
             android:textColor="@android:color/white"
             android:textSize="20dp"
             android:layout_marginTop="-20dp"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:text="많이 아픈 지구"
+            android:text="엄청 많이 아픈 지구"
             android:textColor="#F57676"
             android:textSize="23dp"
             tools:ignore="MissingPrefix" />
